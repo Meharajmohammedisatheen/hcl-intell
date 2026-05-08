@@ -1,4 +1,5 @@
 name: Run Java Tests
+
 on:
   push:
     branches:
@@ -16,22 +17,21 @@ jobs:
           distribution: temurin
           java-version: 21
 
-
       - run: mvn test
-      - name: send HTML Report Mail
-      - uses: dawidd6/action-send-mail@v3
+
+      - name: Send Mail
+        uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
-          server-port: 465
+          server_port: 465
           secure: true
+
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
 
           subject: Automation Test Report
 
-          to: yuhannciamaryleno@gmail.com
-          from: Github Actions
+          to: meharaj671@gmail.com
+          from: GitHub Actions
 
-          html_body: file://target/surefire-reports/emailable-report.html
-
-
+          body: Test Execution Completed Successfully
